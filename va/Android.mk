@@ -55,31 +55,14 @@ LOCAL_CFLAGS := \
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/.. $(generated_sources_dir)
 
 LOCAL_C_INCLUDES := \
-	$(TARGET_OUT_HEADERS)/libva \
 	$(LOCAL_PATH)/x11 \
 	$(LOCAL_PATH)/..
 
-LOCAL_COPY_HEADERS := \
-	va.h \
-	va_dec_hevc.h \
-	va_dec_jpeg.h \
-	va_dec_vp8.h \
-	va_dec_vp9.h \
-	va_enc.h \
-	va_enc_h264.h \
-	va_enc_jpeg.h \
-	va_enc_vp8.h \
-	va_backend.h \
-	va_drmcommon.h \
-	va_vpp.h \
-	va_backend_vpp.h \
-	va_enc_mpeg2.h \
-	va_version.h
-
-LOCAL_COPY_HEADERS_TO := libva/va
 LOCAL_CFLAGS += -Werror
 
 LOCAL_SHARED_LIBRARIES := libdl libdrm libcutils liblog
+
+LOCAL_HEADER_LIBRARIES := intel_libva_headers
 
 include $(BUILD_SHARED_LIBRARY)
 
@@ -98,17 +81,14 @@ LOCAL_CFLAGS := \
 LOCAL_CLANG_CFLAGS += -Wno-missing-field-initializers
 
 LOCAL_C_INCLUDES := \
-	$(TARGET_OUT_HEADERS)/libva \
 	$(TARGET_OUT_HEADERS)/libdrm \
 	$(LOCAL_PATH)/drm
 
-LOCAL_COPY_HEADERS_TO := libva/va
-
-LOCAL_COPY_HEADERS := va_android.h		
 LOCAL_CFLAGS += -Werror
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libva-android
 
+LOCAL_HEADER_LIBRARIES := intel_libva_headers
 LOCAL_SHARED_LIBRARIES := libva libdrm libnativewindow
 
 include $(BUILD_SHARED_LIBRARY)
@@ -126,12 +106,9 @@ LOCAL_CFLAGS := \
 	-DANDROID -DLOG_TAG=\"libva-egl\"
 
 LOCAL_C_INCLUDES := \
-	$(TARGET_OUT_HEADERS)/libva \
 	$(LOCAL_PATH)/x11
 
-LOCAL_COPY_HEADERS_TO := libva/va
-
-LOCAL_COPY_HEADERS := egl/va_egl.h egl/va_backend_egl.h
+LOCAL_HEADER_LIBRARIES := intel_libva_headers
 LOCAL_CFLAGS += -Werror
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libva-egl
@@ -153,15 +130,9 @@ LOCAL_SRC_FILES := va_tpi.c
 LOCAL_CFLAGS := -DANDROID -DLOG_TAG=\"libva-tpi\"
 
 LOCAL_C_INCLUDES := \
-	$(TARGET_OUT_HEADERS)/libva \
 	$(LOCAL_PATH)/..
 
-LOCAL_COPY_HEADERS_TO := libva/va
-
-LOCAL_COPY_HEADERS := \
-	va_tpi.h \
-	va_backend_tpi.h
-
+LOCAL_HEADER_LIBRARIES := intel_libva_headers
 LOCAL_SHARED_LIBRARIES := libva
 LOCAL_CFLAGS += -Werror
 LOCAL_MODULE_TAGS := optional

@@ -1,0 +1,6 @@
+cc_library_headers {
+	name: "intel_libva_headers",
+	export_include_dirs: [
+		".",
+	],
+}
