@@ -74,26 +74,14 @@ LOCAL_COPY_HEADERS := \
 	va_vpp.h \
 	va_backend_vpp.h \
 	va_enc_mpeg2.h \
+	va_version.h
 
 LOCAL_COPY_HEADERS_TO := libva/va
 LOCAL_CFLAGS += -Werror
 
 LOCAL_SHARED_LIBRARIES := libdl libdrm libcutils liblog
 
-GEN := $(generated_sources_dir)/va/va_version.h
-$(GEN): SCRIPT := $(LOCAL_PATH)/../build/gen_version.sh
-$(GEN): PRIVATE_PATH := $(LOCAL_PATH)
-$(GEN): PRIVATE_CUSTOM_TOOL = /bin/bash $(SCRIPT) $(PRIVATE_PATH)/.. $(PRIVATE_PATH)/va_version.h.in > $@
-$(GEN): $(LOCAL_PATH)/va_version.h.in $(LOCAL_PATH)/../build/gen_version.sh $(LOCAL_PATH)/../configure.ac
-	$(transform-generated-source)
-LOCAL_GENERATED_SOURCES := $(GEN)
-
 include $(BUILD_SHARED_LIBRARY)
-
-my_header := $(TARGET_OUT_HEADERS)/libva/va/va_version.h
-ALL_COPIED_HEADERS.$(my_header).MAKEFILE := $(ALL_COPIED_HEADERS.$(my_header).MAKEFILE) $(my_header)
-ALL_COPIED_HEADERS.$(my_header).SRC := $(ALL_COPIED_HEADERS.$(my_header).SRC) $(GEN)
-ALL_COPIED_HEADERS += $(my_header)
 
 # For libva-android
 # =====================================================
